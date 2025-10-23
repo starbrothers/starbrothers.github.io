@@ -3,22 +3,30 @@
 <head>
   <meta charset="utf-8">
   <title>Dört İşlem Şampiyonu — Google Play</title>
+
+  <!-- 1) Meta refresh (no space, URL büyük-küçük harf doğru) -->
   <meta http-equiv="refresh"
-        content="0; url=https://play.google.com/store/apps/details?id=com.StarBrothersSoftware.Drtlemampiyonu">
+        content="0;url=https://play.google.com/store/apps/details?id=com.StarBrothersSoftware.Drtlemampiyonu">
+
+  <!-- Arama motoru gereksiz indekslemesin -->
   <meta name="robots" content="noindex">
-  <!-- Sosyal önizleme (IG/Twitter/WhatsApp için) -->
+
+  <!-- Sosyal önizleme (opsiyonel) -->
   <meta property="og:title" content="Dört İşlem Şampiyonu">
   <meta property="og:description" content="Çarpım tablosu ve temel işlemlerle eğlenceli matematik.">
   <meta property="og:url" content="https://starbrothers.github.io/dortislemsampiyonu">
-  <meta property="og:image" content="https://starbrothers.github.io/assets/DörtİşlemLogo.png">
-  <script>
-    // JS fallback (bazı uygulama içi tarayıcılar için)
-    location.replace("https://play.google.com/store/apps/details?id=com.StarBrothersSoftware.Drtlemampiyonu");
-  </script>
 </head>
 <body>
-  <p>Yönlendiriliyor… Eğer otomatik gitmezse
-    <a href="https://play.google.com/store/apps/details?id=com.StarBrothersSoftware.Drtlemampiyonu">buraya tıkla</a>.
+  <!-- 2) JS fallback -->
+  <script>
+    location.replace("https://play.google.com/store/apps/details?id=com.StarBrothersSoftware.Drtlemampiyonu");
+  </script>
+
+  <!-- 3) NoScript fallback -->
+  <p>Yönlendiriliyor… Otomatik gitmezse
+    <a href="https://play.google.com/store/apps/details?id=com.StarBrothersSoftware.Drtlemampiyonu">
+      buraya tıkla
+    </a>.
   </p>
 </body>
 </html>
