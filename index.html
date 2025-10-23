@@ -95,26 +95,43 @@
     .section h2{margin:0 0 8px;font-size:clamp(22px,3vw,30px)}
     .section p.sub{color:var(--muted);margin:0 0 22px}
 
-/* Hakkımızda bölümünü karart: kahraman (hero) ile süreklilik sağlar */
+/* HAKKIMIZDA: hero'dan gelen koyuluğu uzat + metni parlat */
 #hakkimizda{
   position: relative;
+  isolation: isolate; /* pseudo-element başka katmanlarla karışmasın */
 }
 
+/* Arka plan koyuluğu (üst/alt taşma vererek hero ile süreklilik) */
 #hakkimizda::before{
   content:"";
   position:absolute;
-  /* hero'dan akıcı geçiş için üst/alt fazlalık veriyoruz */
-  inset:-24px 0 -24px 0;
+  inset:-48px 0 -48px 0; /* üst/alt fazlalık */
   background:linear-gradient(
     180deg,
-    rgba(6,11,21,.55) 0%,
-    rgba(6,11,21,.32) 65%,
+    rgba(6,11,21,.62) 0%,
+    rgba(6,11,21,.34) 65%,
     rgba(6,11,21,0) 100%
   );
   pointer-events:none;
-  z-index:0;           /* Artık bölümün İÇİNDE, içeriğin arkasında */
+  z-index:0; /* içerikten geride */
 }
 
+/* İçeriği overlay'in üstüne taşı */
+#hakkimizda > .container{
+  position: relative;
+  z-index: 1;
+}
+
+/* Okunabilirlik için metni parlat */
+#hakkimizda h2{
+  color:#fff;
+  text-shadow:0 2px 10px rgba(0,0,0,.55);
+}
+#hakkimizda .sub{
+  color:#f7fbff;               /* var(--muted)'den daha açık */
+  text-shadow:0 2px 12px rgba(0,0,0,.5);
+}
+    
 /* Metni overlay’in üstüne taşı */
 #hakkimizda > .container{
   position: relative;
