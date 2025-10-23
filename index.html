@@ -95,47 +95,48 @@
     .section h2{margin:0 0 8px;font-size:clamp(22px,3vw,30px)}
     .section p.sub{color:var(--muted);margin:0 0 22px}
 
-/* HAKKIMIZDA: hero'dan gelen koyuluğu uzat + metni parlat */
+/* Hakkımızda bölümünü dairesel/oval karartma ile vurgula */
 #hakkimizda{
   position: relative;
-  isolation: isolate; /* pseudo-element başka katmanlarla karışmasın */
+  isolation: isolate; /* pseudo elemanı bölüm içinde katmanlasın */
 }
 
-/* Arka plan koyuluğu (üst/alt taşma vererek hero ile süreklilik) */
 #hakkimizda::before{
   content:"";
   position:absolute;
-  inset:-100px 0 -10px 0; /* üst/alt fazlalık */
-  background:linear-gradient(
-    180deg,
-    rgba(6,11,21,.62) 0%,
-    rgba(6,11,21,.34) 65%,
-    rgba(6,11,21,0) 100%
-  );
+  inset: -24px 0 -24px 0;              /* üst/alt taşma */
   pointer-events:none;
-  z-index:0; /* içerikten geride */
+  z-index: 0;
+
+  /* Dairesel/oval koyuluk */
+  background:
+    radial-gradient(
+      circle at 24% 28%,               /* MERKEZ: X% Y% (soldan %24, yukarıdan %28) */
+      rgba(6,11,21,.78) 0%,            /* iç: yoğun karartma */
+      rgba(6,11,21,.55) 38%,           /* orta */
+      rgba(6,11,21,.32) 58%,           /* dışa doğru incelme */
+      rgba(6,11,21,0) 72%              /* kenarda sıfıra in */
+    );
 }
 
-/* İçeriği overlay'in üstüne taşı */
+/* Metni karartmanın üstünde tut */
 #hakkimizda > .container{
   position: relative;
   z-index: 1;
 }
 
-/* Okunabilirlik için metni parlat */
-#hakkimizda h2{
-  color:#fff;
-  text-shadow:0 2px 10px rgba(0,0,0,.55);
-}
-#hakkimizda .sub{
-  color:#f7fbff;               /* var(--muted)'den daha açık */
-  text-shadow:0 2px 12px rgba(0,0,0,.5);
-}
-    
-/* Metni overlay’in üstüne taşı */
-#hakkimizda > .container{
-  position: relative;
-  z-index: 1;
+/* Mobilde dairenin merkezini ve yayılımını biraz ortala */
+@media (max-width: 900px){
+  #hakkimizda::before{
+    background:
+      radial-gradient(
+        circle at 50% 8%,              /* MERKEZ: ortalara al */
+        rgba(6,11,21,.78) 0%,
+        rgba(6,11,21,.55) 36%,
+        rgba(6,11,21,.30) 56%,
+        rgba(6,11,21,0) 72%
+      );
+  }
 }
 
     /* GAMES */
