@@ -95,6 +95,21 @@
     .section h2{margin:0 0 8px;font-size:clamp(22px,3vw,30px)}
     .section p.sub{color:var(--muted);margin:0 0 22px}
 
+    /* Hakkımızda bölümünü de karart */
+#hakkimizda{ position: relative; }
+#hakkimizda::before{
+  content:"";
+  position:absolute; inset:-24px 0 -24px 0; /* üst-alt taşma payı */
+  background:linear-gradient(
+    180deg,
+    rgba(6,11,21,.40),
+    rgba(6,11,21,.20) 70%,
+    rgba(6,11,21,0)
+  );
+  pointer-events:none;
+  z-index:-1; /* içeriğin arkasında kalsın */
+}
+
     /* GAMES */
     .games{display:grid;grid-template-columns:repeat(12,1fr);gap:20px}
     .game-card{grid-column:span 6;background:linear-gradient(180deg,#0f2344,#0b1a33);border:1px solid #1b2b49;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;min-height:240px;transition:transform .15s ease, box-shadow .15s ease}
