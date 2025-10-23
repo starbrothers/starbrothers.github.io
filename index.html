@@ -95,19 +95,30 @@
     .section h2{margin:0 0 8px;font-size:clamp(22px,3vw,30px)}
     .section p.sub{color:var(--muted);margin:0 0 22px}
 
-    /* Hakkımızda bölümünü de karart */
-#hakkimizda{ position: relative; }
+/* Hakkımızda bölümünü karart: kahraman (hero) ile süreklilik sağlar */
+#hakkimizda{
+  position: relative;
+}
+
 #hakkimizda::before{
   content:"";
-  position:absolute; inset:-24px 0 -24px 0; /* üst-alt taşma payı */
+  position:absolute;
+  /* hero'dan akıcı geçiş için üst/alt fazlalık veriyoruz */
+  inset:-24px 0 -24px 0;
   background:linear-gradient(
     180deg,
-    rgba(6,11,21,.40),
-    rgba(6,11,21,.20) 70%,
-    rgba(6,11,21,0)
+    rgba(6,11,21,.55) 0%,
+    rgba(6,11,21,.32) 65%,
+    rgba(6,11,21,0) 100%
   );
   pointer-events:none;
-  z-index:-1; /* içeriğin arkasında kalsın */
+  z-index:0;           /* Artık bölümün İÇİNDE, içeriğin arkasında */
+}
+
+/* Metni overlay’in üstüne taşı */
+#hakkimizda > .container{
+  position: relative;
+  z-index: 1;
 }
 
     /* GAMES */
