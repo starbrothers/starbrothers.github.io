@@ -7,6 +7,17 @@
   <meta name="description" content="StarBrothers Software: Eğlenceli, öğretici ve kaliteli mobil oyunlar geliştiriyoruz. Dört İşlem Şampiyonu, Çarp Kurtar ve daha fazlası!" />
   <meta name="theme-color" content="#0f172a" />
   <link rel="icon" href="assets/favicon.png" />
+
+  <!-- GA4: Sayfa görüntüleme + event ölçümü -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y258PPDQQY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    // page_view otomatik gönderilir; IP anonimleştirme aktif
+    gtag('config', 'G-Y258PPDQQY', { anonymize_ip: true });
+  </script>
+
   <style>
     :root{--bg:#060b15;--card:#0d1730;--text:#eaf2ff;--muted:#a7b9dd;--brand:#49b8ff;--brand-2:#7de1ff}
     *{box-sizing:border-box}
@@ -163,7 +174,6 @@
         <a class="link" href="#oyunlar" data-i18n="nav.games">Oyunlarımız</a>
         <a class="link" href="#iletisim" data-i18n="nav.contact">İletişim</a>
         <div class="lang-switch" aria-label="Dil seçimi">
-          <!-- 🔹 type="button" eklendi -->
           <button id="btnTR" class="active" data-lang="tr" aria-pressed="true" type="button">TR</button>
           <button id="btnEN" data-lang="en" aria-pressed="false" type="button">EN</button>
         </div>
@@ -213,7 +223,8 @@
             </div>
           </div>
           <div class="game-actions">
-            <a class="btn small primary" href="/dortislemsampiyonu" target="_blank" rel="noopener noreferrer" data-i18n="games.gotoPlay">Google Play'e Git</a>
+            <!-- data-game eklendi -->
+            <a class="btn small primary" href="/dortislemsampiyonu" target="_blank" rel="noopener noreferrer" data-i18n="games.gotoPlay" data-game="dortislem">Google Play'e Git</a>
           </div>
         </article>
 
@@ -234,7 +245,8 @@
             </div>
           </div>
           <div class="game-actions">
-            <a class="btn small primary" href="/carpkurtar" target="_blank" rel="noopener noreferrer" data-i18n="games.gotoPlay">Google Play'e Git</a>
+            <!-- data-game eklendi -->
+            <a class="btn small primary" href="/carpkurtar" target="_blank" rel="noopener noreferrer" data-i18n="games.gotoPlay" data-game="carpkurtar">Google Play'e Git</a>
           </div>
         </article>
       </div>
@@ -341,6 +353,28 @@
           }
         });
       }
+
+      // 🔹 Google Play buton tıklamalarını GA4'e "play_click" olarak gönder
+      document.addEventListener('click', (e) => {
+        const a = e.target.closest('a.btn.small.primary[data-game]');
+        if (!a) return;
+
+        const href   = a.href;
+        const target = a.target || '_self';
+
+        // Event'in güvenle kaydolması için minik gecikme
+        e.preventDefault();
+
+        if (typeof gtag === 'function') {
+          gtag('event', 'play_click', {
+            game: a.getAttribute('data-game'),                // 'dortislem' | 'carpkurtar'
+            language: document.documentElement.lang,          // 'tr' | 'en'
+            path: window.location.pathname
+          });
+        }
+
+        setTimeout(() => window.open(href, target), 120);
+      });
     });
   </script>
 </body>
